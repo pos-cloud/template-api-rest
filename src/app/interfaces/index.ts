@@ -1,4 +1,3 @@
-import { User } from './user.interface';
-import { RequestWithUser } from './request-with-user.interface';
+import { UserI } from './user.interface';
 
-export { User, RequestWithUser };
+export { UserI };

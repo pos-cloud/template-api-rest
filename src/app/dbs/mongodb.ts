@@ -5,6 +5,8 @@ class MongoDBManager {
   private database: Db | null = null;
   private collection: Collection<any> | null = null;
 
+  // uri = "mongodb+srv://pos:pos@cluster0.fscmrqu.mongodb.net/?retryWrites=true&w=majority";
+
   async initConnection(databaseName: string) {
     try {
       const mongoUri = `mongodb://localhost:27017/${databaseName}`; // Reemplaza con tu URL de conexión de MongoDB

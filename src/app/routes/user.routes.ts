@@ -9,8 +9,9 @@ class UserRoutes {
   constructor() {
     this.intializeRoutes();
   }
+
   intializeRoutes() {
-    this.router.get('/me', [authMiddleware], this.UserController.getMe);
+    this.router.get('/me', [ authMiddleware ], this.UserController.getMe);
   }
 }
 export default new UserRoutes().router;
