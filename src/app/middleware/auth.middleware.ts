@@ -19,28 +19,21 @@ async function authMiddleware(
     try {
       const dataJWT: DataJWT = jwt.decode(
         token,
-        'P05R35T@'
+        process.env.TOKEN_SECRET || ''
       );
 
       const database: string = dataJWT?.database;
       const userId: string = dataJWT?.user;
 
       request['database'] = database;
-      request['userId'] = userId
-
-      // Asignar los valores al request
-      //request.database = database;
-      //request.userId = userId;
-      
-      console.log(database)
-      console.log(userId)
+      request['userId'] = userId;
 
       next()
     } catch (error) {
-      response.status(500).send({ "error": error })
+      response.status(500).send({ error: error.toString() })
     }
   } else {
-    response.status(500).send({ "error": "no se encontro token" })
+    response.status(500).send({ "error": "No se encontro authorization" })
   }
 }
 
