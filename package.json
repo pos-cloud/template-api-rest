@@ -25,8 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx prettier --write .",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "pre-commit": "commitlint -E HUSKY_GIT_PARAMS && npx prettier --write ."
     }
   },
   "author": "POS Cloud",
