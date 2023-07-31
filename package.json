@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "husky": "^8.0.3",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "ts-node": "^7.0.1",
@@ -19,6 +20,11 @@
   "scripts": {
     "dev": "nodemon ./src/server.ts",
     "prod": "nodemon ./src/server.ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx prettier --write ."
+    }
   },
   "author": "POS Cloud",
   "license": "MIT"
