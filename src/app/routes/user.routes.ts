@@ -11,7 +11,7 @@ class UserRoutes {
   }
 
   intializeRoutes() {
-    this.router.get('/me', [ authMiddleware ], this.UserController.getMe);
+    this.router.get('/me', [authMiddleware], this.UserController.getMe);
   }
 }
 export default new UserRoutes().router;

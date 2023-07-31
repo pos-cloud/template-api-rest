@@ -1,39 +1,39 @@
-import { NextFunction, Request, Response } from "express";
-import * as jwt from "jwt-simple";
+import { NextFunction, Request, Response } from 'express';
+import * as jwt from 'jwt-simple';
 
 interface DataJWT {
-  user: string
-  database: string
-  clientId: string
-  iat: number
-  exp: number
+  user: string;
+  database: string;
+  clientId: string;
+  iat: number;
+  exp: number;
 }
 
 async function authMiddleware(
   request: Request,
   response: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   if (request?.headers?.authorization) {
-    const token = request.headers.authorization.replace(/['"]+/g, "");
+    const token = request.headers.authorization.replace(/['"]+/g, '');
     try {
       const dataJWT: DataJWT = jwt.decode(
         token,
-        process.env.TOKEN_SECRET || ''
+        process.env.TOKEN_SECRET || '',
       );
 
       const database: string = dataJWT?.database;
       const userId: string = dataJWT?.user;
-     
+
       request['database'] = database;
       request['userId'] = userId;
 
-      next()
+      next();
     } catch (error) {
-      response.status(500).send({ message: error.toString() })
+      response.status(500).send({ message: error.toString() });
     }
   } else {
-    response.status(500).send({ message: "No se encontro authorization" })
+    response.status(500).send({ message: 'No se encontro authorization' });
   }
 }
 

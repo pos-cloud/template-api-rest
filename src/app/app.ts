@@ -2,7 +2,6 @@ import { Application, json } from 'express';
 
 import Routes from './routes';
 
-
 export default class App {
   constructor(app: Application) {
     this.config(app);
