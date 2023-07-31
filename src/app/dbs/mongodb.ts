@@ -9,9 +9,11 @@ class MongoDBManager {
 
   async initConnection(databaseName: string) {
     try {
-      const mongoUri = `mongodb://localhost:27017/${databaseName}`; // Reemplaza con tu URL de conexión de MongoDB
-      this.client = await MongoClient.connect(mongoUri);
-      this.database = this.client.db(databaseName);
+      const mongoUri = `${process.env.MONGO_URL}/${databaseName}`; // Reemplaza con tu URL de conexión de MongoDB
+      if(!this.client) {
+        this.client = await MongoClient.connect(mongoUri);
+        this.database = this.client.db(databaseName);
+      }
       console.log('Conexión con MongoDB establecida');
     } catch (error) {
       console.error('Error al conectar con MongoDB:', error);
@@ -28,9 +30,14 @@ class MongoDBManager {
   }
 
   async closeConnection() {
-    if (this.client) {
-      await this.client.close();
-      console.log('Conexión con MongoDB cerrada');
+    try {      
+      if (this.client) {
+        await this.client.close();
+        console.log('Conexión con MongoDB cerrada');
+      }
+    } catch (error) {
+      console.error("Error closing MongoDB connection:", error);
+      throw error;
     }
   }
 }

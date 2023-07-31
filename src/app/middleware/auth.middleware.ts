@@ -24,16 +24,16 @@ async function authMiddleware(
 
       const database: string = dataJWT?.database;
       const userId: string = dataJWT?.user;
-
+     
       request['database'] = database;
       request['userId'] = userId;
 
       next()
     } catch (error) {
-      response.status(500).send({ error: error.toString() })
+      response.status(500).send({ message: error.toString() })
     }
   } else {
-    response.status(500).send({ "error": "No se encontro authorization" })
+    response.status(500).send({ message: "No se encontro authorization" })
   }
 }
 
